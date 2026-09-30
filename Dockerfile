@@ -1,7 +1,10 @@
-FROM 3proxy/3proxy:latest
+FROM alpine:latest
 
-COPY 3proxy.cfg /etc/3proxy/3proxy.cfg
+# نصب پکیج فوق‌العاده سبک microsocks
+RUN apk add --no-cache microsocks
 
+# پورت داخلی کانتینر
 EXPOSE 1080
 
-CMD ["3proxy", "/etc/3proxy/3proxy.cfg"]
+# اجرای میکروساکس بدون احراز هویت روی پورت 1080
+CMD ["microsocks", "-p", "1080"]
